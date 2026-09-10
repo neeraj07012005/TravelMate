@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        TravelMate | Smart Travel Planner
+    </title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        ✈ <span>TravelMate</span>
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="#planner">
+            Plan Trip
+        </a>
+
+        <a href="#results">
+            My Trip
+        </a>
+
+        <a href="#explore">
+            Explore
+        </a>
+
+    </div>
+
+
+    <button
+            class="nav-btn"
+            onclick="document.getElementById('planner').scrollIntoView({behavior:'smooth'})">
+
+        Plan a Trip
+
+    </button>
+
+</nav>
+
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            ✨ SMART TRAVEL PLANNING
+        </div>
+
+
+        <h1>
+
+            Plan less.<br>
+
+            <span>
+                Travel more.
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            Discover destinations, check real-time weather,
+            explore popular places and plan your perfect trip.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<main>
+
+
+<!-- ================= TRIP PLANNER ================= -->
+
+<section
+        class="planner"
+        id="planner">
+
+
+    <div class="planner-title">
+
+        <div>
+
+            <p class="small-title">
+                YOUR JOURNEY
+            </p>
+
+            <h2>
+                Where are you going?
+            </h2>
+
+        </div>
+
+
+        <div class="step">
+            STEP 01
+        </div>
+
+    </div>
+
+
+
+    <div class="form-grid">
+
+
+        <!-- SOURCE -->
+
+        <div class="input-box">
+
+            <label>
+                FROM
+            </label>
+
+
+            <div class="input-wrapper">
+
+                <span>
+                    📍
+                </span>
+
+
+                <input
+                        id="source"
+                        type="text"
+                        placeholder="Delhi">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DESTINATION -->
+
+        <div class="input-box">
+
+            <label>
+                DESTINATION
+            </label>
+
+
+            <div class="input-wrapper">
+
+                <span>
+                    📍
+                </span>
+
+
+                <input
+                        id="destination"
+                        type="text"
+                        placeholder="Goa">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DEPARTURE -->
+
+        <div class="input-box">
+
+            <label>
+                DEPARTURE
+            </label>
+
+
+            <div class="input-wrapper">
+
+                <span>
+                    📅
+                </span>
+
+
+                <input
+                        id="travelDate"
+                        type="date">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RETURN -->
+
+        <div class="input-box">
+
+            <label>
+                RETURN
+            </label>
+
+
+            <div class="input-wrapper">
+
+                <span>
+                    📅
+                </span>
+
+
+                <input
+                        id="returnDate"
+                        type="date">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DURATION -->
+
+        <div class="input-box duration-box">
+
+            <label>
+                DURATION
+            </label>
+
+
+            <div class="input-wrapper">
+
+                <span>
+                    🕐
+                </span>
+
+
+                <input
+                        id="duration"
+                        type="number"
+                        min="1"
+                        placeholder="4">
+
+
+                <span class="days-text">
+                    days
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- PLAN BUTTON -->
+
+    <button
+            class="plan-btn"
+            id="planButton"
+            onclick="planTrip()">
+
+
+        <span>
+            ✈
+        </span>
+
+
+        <span id="buttonText">
+            Plan My Trip
+        </span>
+
+
+        <span>
+            →
+        </span>
+
+    </button>
+
+
+</section>
+
+
+
+<!-- ================= RESULTS ================= -->
+
+<section
+        class="results"
+        id="results">
+
+
+    <!-- SECTION HEADER -->
+
+    <div class="section-heading">
+
+        <div>
+
+            <p class="small-title">
+                YOUR ADVENTURE
+            </p>
+
+
+            <h2 id="tripTitle">
+                Trip Overview
+            </h2>
+
+        </div>
+
+
+        <span
+                id="tripStatus"
+                class="status">
+
+            Ready to plan
+
+        </span>
+
+    </div>
+
+
+
+    <div class="overview-grid">
+
+
+        <!-- ================= WEATHER ================= -->
+
+        <div class="info-card weather-card">
+
+
+            <div class="card-top">
+
+                <span class="card-icon">
+                    🌤️
+                </span>
+
+
+                <span class="card-label">
+                    WEATHER
+                </span>
+
+            </div>
+
+
+
+            <div class="weather-temp">
+
+                <span id="temperature">
+                    --
+                </span>
+
+                °C
+
+            </div>
+
+
+
+            <p id="weatherDescription">
+                Weather information
+            </p>
+
+
+
+            <p>
+
+                Wind:
+
+                <strong id="wind">
+                    --
+                </strong>
+
+                km/h
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- ================= POPULAR PLACES ================= -->
+
+        <div class="info-card places-card">
+
+
+            <div class="card-top">
+
+                <span class="card-icon">
+                    📍
+                </span>
+
+
+                <span class="card-label">
+                    POPULAR PLACES
+                </span>
+
+            </div>
+
+
+
+            <ul id="places">
+
+                <li>
+                    Plan your trip to discover places
+                </li>
+
+            </ul>
+
+
+        </div>
+
+
+
+        <!-- ================= FLIGHTS ================= -->
+
+        <div class="info-card">
+
+
+            <div class="card-top">
+
+                <span class="card-icon">
+                    ✈️
+                </span>
+
+
+                <span class="card-label">
+                    FLIGHTS
+                </span>
+
+            </div>
+
+
+
+            <h3>
+                Cheapest Flight
+            </h3>
+
+
+
+            <div class="budget">
+
+                ₹<span id="flightPrice">
+                    --
+                </span>
+
+            </div>
+
+
+
+            <p>
+
+                Duration:
+
+                <strong id="flightDuration">
+                    --
+                </strong>
+
+                minutes
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- ================= BUDGET ================= -->
+
+        <div class="info-card budget-card">
+
+
+            <div class="card-top">
+
+                <span class="card-icon">
+                    💰
+                </span>
+
+
+                <span class="card-label">
+                    ESTIMATED BUDGET
+                </span>
+
+            </div>
+
+
+
+            <div class="budget">
+
+                ₹<span id="budget">
+                    --
+                </span>
+
+            </div>
+
+
+
+            <p>
+                Estimated trip cost
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ================= EXPLORE ================= -->
+
+<section
+        class="explore"
+        id="explore">
+
+
+    <div class="section-heading">
+
+        <div>
+
+            <p class="small-title">
+                GET INSPIRED
+            </p>
+
+
+            <h2>
+                Popular destinations
+            </h2>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="destination-grid">
+
+
+        <!-- DELHI -->
+
+        <div class="destination-card delhi">
+
+
+            <div class="destination-overlay">
+
+                <span>
+                    INDIA
+                </span>
+
+
+                <h3>
+                    Delhi
+                </h3>
+
+
+                <p>
+                    History • Culture • Food
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- GOA -->
+
+        <div class="destination-card goa">
+
+
+            <div class="destination-overlay">
+
+                <span>
+                    INDIA
+                </span>
+
+
+                <h3>
+                    Goa
+                </h3>
+
+
+                <p>
+                    Beaches • Nightlife • Adventure
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- MUMBAI -->
+
+        <div class="destination-card mumbai">
+
+
+            <div class="destination-overlay">
+
+                <span>
+                    INDIA
+                </span>
+
+
+                <h3>
+                    Mumbai
+                </h3>
+
+
+                <p>
+                    City • Coast • Entertainment
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+
+    <div class="logo">
+        ✈ TravelMate
+    </div>
+
+
+    <p>
+        Smart travel planning made simple.
+    </p>
+
+
+</footer>
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>

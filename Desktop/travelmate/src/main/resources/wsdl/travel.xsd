@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://travelmate.com/travel"
+        xmlns:tns="http://travelmate.com/travel"
+        elementFormDefault="qualified">
+
+    <!-- REQUEST -->
+
+    <xs:element name="getTravelInfoRequest">
+
+        <xs:complexType>
+
+            <xs:sequence>
+
+                <xs:element
+                        name="source"
+                        type="xs:string"/>
+
+                <xs:element
+                        name="destination"
+                        type="xs:string"/>
+
+                <xs:element
+                        name="travelDate"
+                        type="xs:string"/>
+
+                <xs:element
+                        name="returnDate"
+                        type="xs:string"/>
+
+                <xs:element
+                        name="duration"
+                        type="xs:int"/>
+
+            </xs:sequence>
+
+        </xs:complexType>
+
+    </xs:element>
+
+
+    <!-- RESPONSE -->
+
+    <xs:element name="getTravelInfoResponse">
+
+        <xs:complexType>
+
+            <xs:sequence>
+
+                <xs:element
+                        name="message"
+                        type="xs:string"/>
+
+                <xs:element
+                        name="source"
+                        type="xs:string"/>
+
+                <xs:element
+                        name="destination"
+                        type="xs:string"/>
+
+                <xs:element
+                        name="travelDate"
+                        type="xs:string"/>
+
+                <xs:element
+                        name="returnDate"
+                        type="xs:string"/>
+
+                <xs:element
+                        name="duration"
+                        type="xs:int"/>
+
+
+                <!-- WEATHER -->
+
+                <xs:element
+                        name="temperature"
+                        type="xs:double"/>
+
+                <xs:element
+                        name="weatherCode"
+                        type="xs:int"/>
+
+                <xs:element
+                        name="windSpeed"
+                        type="xs:double"/>
+
+
+                <!-- POPULAR PLACES -->
+
+                <xs:element name="places">
+
+                    <xs:complexType>
+
+                        <xs:sequence>
+
+                            <xs:element
+                                    name="place"
+                                    maxOccurs="unbounded">
+
+                                <xs:complexType>
+
+                                    <xs:sequence>
+
+                                        <xs:element
+                                                name="name"
+                                                type="xs:string"/>
+
+                                        <xs:element
+                                                name="description"
+                                                type="xs:string"/>
+
+                                    </xs:sequence>
+
+                                </xs:complexType>
+
+                            </xs:element>
+
+                        </xs:sequence>
+
+                    </xs:complexType>
+
+                </xs:element>
+
+
+                <!-- CHEAPEST FLIGHT -->
+
+                <xs:element
+                        name="flightPrice"
+                        type="xs:double"/>
+
+                <xs:element
+                        name="flightDuration"
+                        type="xs:string"/>
+
+
+                <!-- SAVED -->
+
+                <xs:element
+                        name="saved"
+                        type="xs:boolean"/>
+
+            </xs:sequence>
+
+        </xs:complexType>
+
+    </xs:element>
+
+</xs:schema>
