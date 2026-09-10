@@ -39,6 +39,8 @@ public class TravelEndpoint {
 
         try {
 
+            // ---------------- REQUEST ----------------
+
             String source = request
                     .getElementsByTagNameNS(NAMESPACE, "source")
                     .item(0)
@@ -66,6 +68,9 @@ public class TravelEndpoint {
                             .getTextContent()
             );
 
+
+            // ---------------- SERVICE ----------------
+
             TravelResult result = travelService.saveTrip(
                     source,
                     destination,
@@ -73,6 +78,7 @@ public class TravelEndpoint {
                     returnDate,
                     duration
             );
+
 
             // ---------------- WEATHER ----------------
 
@@ -94,10 +100,12 @@ public class TravelEndpoint {
                     ((Number) current.get("weather_code"))
                             .intValue();
 
+
             // ---------------- PLACES ----------------
 
             List<Place> places =
                     result.getPlaces();
+
 
             // ---------------- FLIGHTS ----------------
 
@@ -113,6 +121,7 @@ public class TravelEndpoint {
                             flights.get("duration")
                     );
 
+
             // ---------------- XML DOCUMENT ----------------
 
             Document document =
@@ -127,7 +136,8 @@ public class TravelEndpoint {
                             "getTravelInfoResponse"
                     );
 
-            // MESSAGE
+
+            // ---------------- MESSAGE ----------------
 
             Element message =
                     document.createElementNS(
@@ -139,7 +149,8 @@ public class TravelEndpoint {
                     "Trip saved successfully!"
             );
 
-            // SOURCE
+
+            // ---------------- SOURCE ----------------
 
             Element sourceElement =
                     document.createElementNS(
@@ -149,7 +160,8 @@ public class TravelEndpoint {
 
             sourceElement.setTextContent(source);
 
-            // DESTINATION
+
+            // ---------------- DESTINATION ----------------
 
             Element destinationElement =
                     document.createElementNS(
@@ -161,7 +173,8 @@ public class TravelEndpoint {
                     destination
             );
 
-            // TRAVEL DATE
+
+            // ---------------- TRAVEL DATE ----------------
 
             Element travelDateElement =
                     document.createElementNS(
@@ -173,7 +186,8 @@ public class TravelEndpoint {
                     travelDate
             );
 
-            // RETURN DATE
+
+            // ---------------- RETURN DATE ----------------
 
             Element returnDateElement =
                     document.createElementNS(
@@ -185,7 +199,8 @@ public class TravelEndpoint {
                     returnDate
             );
 
-            // DURATION
+
+            // ---------------- DURATION ----------------
 
             Element durationElement =
                     document.createElementNS(
@@ -197,7 +212,8 @@ public class TravelEndpoint {
                     String.valueOf(duration)
             );
 
-            // TEMPERATURE
+
+            // ---------------- TEMPERATURE ----------------
 
             Element temperatureElement =
                     document.createElementNS(
@@ -209,7 +225,8 @@ public class TravelEndpoint {
                     String.valueOf(temperature)
             );
 
-            // WEATHER CODE
+
+            // ---------------- WEATHER CODE ----------------
 
             Element weatherCodeElement =
                     document.createElementNS(
@@ -221,7 +238,8 @@ public class TravelEndpoint {
                     String.valueOf(weatherCode)
             );
 
-            // WIND
+
+            // ---------------- WIND ----------------
 
             Element windElement =
                     document.createElementNS(
@@ -233,7 +251,8 @@ public class TravelEndpoint {
                     String.valueOf(windSpeed)
             );
 
-            // ---------------- PLACES XML ----------------
+
+            // ---------------- PLACES ----------------
 
             Element placesElement =
                     document.createElementNS(
@@ -282,6 +301,7 @@ public class TravelEndpoint {
                 );
             }
 
+
             // ---------------- FLIGHT PRICE ----------------
 
             Element flightPriceElement =
@@ -293,6 +313,7 @@ public class TravelEndpoint {
             flightPriceElement.setTextContent(
                     String.valueOf(flightPrice)
             );
+
 
             // ---------------- FLIGHT DURATION ----------------
 
@@ -306,6 +327,7 @@ public class TravelEndpoint {
                     flightDuration
             );
 
+
             // ---------------- SAVED ----------------
 
             Element savedElement =
@@ -316,31 +338,77 @@ public class TravelEndpoint {
 
             savedElement.setTextContent("true");
 
+
             // ---------------- BUILD RESPONSE ----------------
 
             response.appendChild(message);
-            response.appendChild(sourceElement);
-            response.appendChild(destinationElement);
-            response.appendChild(travelDateElement);
-            response.appendChild(returnDateElement);
-            response.appendChild(durationElement);
 
-            response.appendChild(temperatureElement);
-            response.appendChild(weatherCodeElement);
-            response.appendChild(windElement);
+            response.appendChild(
+                    sourceElement
+            );
 
-            response.appendChild(placesElement);
+            response.appendChild(
+                    destinationElement
+            );
 
-            response.appendChild(flightPriceElement);
-            response.appendChild(flightDurationElement);
+            response.appendChild(
+                    travelDateElement
+            );
 
-            response.appendChild(savedElement);
+            response.appendChild(
+                    returnDateElement
+            );
+
+            response.appendChild(
+                    durationElement
+            );
+
+            response.appendChild(
+                    temperatureElement
+            );
+
+            response.appendChild(
+                    weatherCodeElement
+            );
+
+            response.appendChild(
+                    windElement
+            );
+
+            response.appendChild(
+                    placesElement
+            );
+
+            response.appendChild(
+                    flightPriceElement
+            );
+
+            response.appendChild(
+                    flightDurationElement
+            );
+
+            response.appendChild(
+                    savedElement
+            );
 
             document.appendChild(response);
 
             return response;
 
+
         } catch (Exception e) {
+
+            // PRINT THE REAL ERROR IN RENDER LOGS
+
+            System.err.println(
+                    "========== TRAVELMATE ERROR =========="
+            );
+
+            e.printStackTrace();
+
+            System.err.println(
+                    "======================================"
+            );
 
             throw new RuntimeException(
                     "Error processing travel request",
